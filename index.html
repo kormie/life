@@ -70,16 +70,16 @@ h1{
 }
 #life-years .year{
 	display: inline-block;
-	box-sizing: border-box;
+	/* box-sizing: border-box; */
 	color: #fff;
 	font-weight: 300;
 	white-space: nowrap;
-	box-sizing: border-box;
+	/* box-sizing: border-box; */
 	height: 100%;
-	border-left: 1px dashed rgba(255,255,255,.2);
+	/* border-left: 1px dashed rgba(255,255,255,.2); */
 }
 #life-years .year:first-child{
-	border-left: 0;
+	/* border-left: 0; */
 }
 #life-years .year span{
 	background: linear-gradient(to bottom, rgba(56,64,71,1) 30%,rgba(56,64,71,0) 100%);
@@ -120,8 +120,8 @@ h1{
 	display: inline-block;
 	overflow: hidden;
 	height: 0;
-	border: 4px solid #fff;
-	border-radius: 4px;
+	/* border: 4px solid #fff; */
+	/* border-radius: 4px; */
 	margin-right: 10px;
 	opacity: .3;
 	position: relative;
@@ -203,12 +203,14 @@ h1{
 			var list = response.match(/\-\s+[^\n\r]+/ig);
 			var data = [];
 			list.forEach(function(l){
-				var matches = l.match(/\-\s+([\d\/\-\~]+)\s(.*)/i);
+				var matches = l.match(/\-\s+([\d\/\-\~]+)\s(.*)\s\((.*)\)/i);
 				var time = matches[1];
 				var text = matches[2];
+				var category = matches[3];
 				data.push({
 					time: life.parseTime(time),
-					text: text
+					text: text,
+					category: category
 				});
 			});
 			return data;
@@ -303,7 +305,7 @@ h1{
 			}
 
 			return '<div class="event" style="margin-left: ' + offset.toFixed(2) + 'px">'
-				+ '<div class="time" style="width: ' + width.toFixed(2) + 'px"></div>'
+				+ '<div class="time ' + d.category.toLowerCase() + '" style="width: ' + width.toFixed(2) + 'px"></div>'
 				+ '<b>' + d.time.title + '</b> ' + d.text
 				+ '</div>';
 		},
